@@ -18,40 +18,37 @@ public class Solution04 {
     }
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
         TreeNode root=new TreeNode(pre[0]);
+
         int len=pre.length;
         if(len==1){
-            root.left=null;
-            root.right=null;
             return root;
         }
-        int rootval=root.val;
         int i;
-        for(i=0;i<len;i++){
-            if(rootval==in[i]){
+        for(i=0;i<pre.length;i++){
+            if(pre[0]==in[i]){
                 break;
             }
         }
-
         if(i>0){
-            int[] pr=new int[i];
-            int[] ino=new int[i];
+            int pref[]=new int[i];
+            int inf[]=new int[i];
             for(int j=0;j<i;j++){
-                pr[j]=pre[j+1];
-                ino[j]=in[j];
+                pref[j]=pre[j+1];
+                inf[j]=in[j];
             }
-            root.left=reConstructBinaryTree(pr,ino);
+            root.left=reConstructBinaryTree(pref,inf);
         }else{
             root.left=null;
         }
-        if(len-1-i>0){
-            int[] pr=new int[len-1-i];
-            int[] ino=new int[len-1-i];
+        if(len-i-1>0){
+            int prel[]=new int[len-1-i];
+            int inl[]=new int[len-1-i];
             for(int j=0;j<len-1-i;j++){
-                pr[j]=pre[j+i+1];
-                ino[j]=in[j+i+1];
+                prel[j]=pre[j+1+i];
+                inl[j]=in[j+1+i];
             }
-            root.right=reConstructBinaryTree(pr,ino);
-        }else {
+            root.right=reConstructBinaryTree(prel,inl);
+        }else{
             root.right=null;
         }
         return root;
