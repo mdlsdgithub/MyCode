@@ -26,19 +26,19 @@ public class Solution14 {
 
     }
     public ListNode14 FindKthToTail(ListNode14 head,int k) {
-        if(head==null||k<0) {
+        if(head==null||k<=0) {
             return null;
         }
             ListNode14 first=head;
             ListNode14 last=head;
-            for(int i=0;i<k;i++){
-                if(first!=null){
+            for(int i=1;i<k;i++){
+                if(first.next!=null){
                     first=first.next;
                 }else{
                     return  null;
                 }
             }
-            while(first!=null){
+            while(first.next!=null){
                 first=first.next;
                 last=last.next;
             }
